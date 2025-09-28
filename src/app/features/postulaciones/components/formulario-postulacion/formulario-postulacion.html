@@ -1,0 +1,78 @@
+<div class="backdrop" (click)="onCerrarFormulario()"></div>
+<dialog open class="py-4 px-5 border-0" id="formularioDiag">
+  <h2 class="fs-3 mb-3">Formulario de postulación</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre Completo (*)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nombre"
+        name="nombre"
+        required
+        [(ngModel)]="postulacion.nombre"
+      />
+      @if(mostrarValidacion && !postulacion.nombre) {
+      <p class="text-danger">Por favor ingrese su nombre completo</p>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Correo Electrónico (*)</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+        [(ngModel)]="postulacion.email"
+      />
+      @if(mostrarValidacion && !postulacion.email) {
+      <p class="text-danger">Por favor ingrese un correo electrónico válido</p>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="telefono" class="form-label">Teléfono</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="telefono"
+        name="telefono"
+        required
+        [(ngModel)]="postulacion.telefono"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="comentario" class="form-label">Comentario Adicional</label>
+      <textarea
+        class="form-control"
+        id="comentario"
+        name="comentario"
+        rows="3"
+        [(ngModel)]="postulacion.comentario"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="cvFile" class="form-label">Adjuntar CV (*)</label>
+      <input
+        class="form-control"
+        type="file"
+        id="cvFile"
+        name="archivo"
+        required
+        [(ngModel)]="postulacion.archivo"
+      />
+      @if(mostrarValidacion && !postulacion.archivo) {
+      <p class="text-danger">Por favor adjunte su CV</p>
+      }
+    </div>
+    <button type="submit" class="btn btn-danger">Enviar Postulación</button>
+    <button
+      type="button"
+      class="btn btn-secondary ms-3"
+      (click)="onCerrarFormulario()"
+    >
+      Cancelar
+    </button>
+  </form>
+</dialog>

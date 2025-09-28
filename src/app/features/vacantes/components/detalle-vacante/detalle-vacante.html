@@ -1,3 +1,10 @@
+@if(mostrarFormulario) {
+<app-formulario-postulacion
+  [idVacante]="vacante?.id"
+  (cerrarFormulario)="onCerrarFormulario()"
+/>
+}
+
 <div class="card my-1 ms-1">
   <div class="card-body mt-3">
     <h5 class="card-title mb-4">{{ vacante?.titulo }}</h5>
@@ -24,5 +31,9 @@
     <p class="card-text">
       {{ vacante?.fecha_vencimiento | date : "longDate" : undefined : "es" }}
     </p>
+
+    <button class="btn btn-danger mt-2 mb-3" (click)="onPostular()">
+      Postular
+    </button>
   </div>
 </div>
