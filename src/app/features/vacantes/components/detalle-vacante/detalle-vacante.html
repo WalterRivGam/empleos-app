@@ -1,0 +1,28 @@
+<div class="card my-1 ms-1">
+  <div class="card-body mt-3">
+    <h5 class="card-title mb-4">{{ vacante?.titulo }}</h5>
+    <p class="fw-bold">Descripción:</p>
+    <p class="card-text">{{ vacante?.descripcion }}</p>
+
+    @if(vacante?.ubicacion) {
+    <p class="fw-bold">Ubicación:</p>
+    <p class="card-text">{{ vacante?.ubicacion }}</p>
+
+    } @if(vacante?.salario_opc) {
+    <p class="fw-bold">Salario:</p>
+    <p class="card-text">
+      {{ vacante?.salario_opc | currency : "S/." : "symbol" : "1.0-3" }}
+    </p>
+    }
+
+    <p class="fw-bold">Fecha de publicación:</p>
+    <p class="card-text">
+      {{ vacante?.fecha_publicacion | date : "longDate" : undefined : "es" }}
+    </p>
+
+    <p class="fw-bold">Fecha de vencimiento:</p>
+    <p class="card-text">
+      {{ vacante?.fecha_vencimiento | date : "longDate" : undefined : "es" }}
+    </p>
+  </div>
+</div>

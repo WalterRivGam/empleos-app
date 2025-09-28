@@ -1,0 +1,10 @@
+<ul id="vacantes">
+  @for (vacante of vacantes; track vacante.id) {
+  <li>
+    <app-vacante
+      [vacante]="vacante"
+      (seleccionVacante)="onVacanteSeleccionada($event)"
+    />
+  </li>
+  }
+</ul>
