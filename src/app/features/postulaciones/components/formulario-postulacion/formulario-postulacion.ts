@@ -15,7 +15,7 @@ export class FormularioPostulacionComponent {
   @Input() idVacante?: number;
   postulacionService = inject(PostulacionService);
   mostrarValidacion: boolean = false;
-  @Output() cerrarFormulario = new EventEmitter<void>();
+  @Output() cerrarFormularioPostulacion = new EventEmitter<void>();
 
   onSubmit() {
     this.mostrarValidacion = true;
@@ -26,10 +26,21 @@ export class FormularioPostulacionComponent {
       return;
     }
 
-    console.log('Postulación enviada:', this.postulacion);
+    this.postulacionService.agregarPostulacion(this.postulacion).subscribe({
+      next: (response) => console.log('Respuesta:', response),
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Completado'),
+    });
+    this.onCerrarFormulario();
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.postulacion.archivo = event.target.files[0];
+    }
   }
 
   onCerrarFormulario() {
-    this.cerrarFormulario.emit();
+    this.cerrarFormularioPostulacion.emit();
   }
 }

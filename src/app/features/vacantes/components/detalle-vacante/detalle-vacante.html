@@ -1,39 +1,53 @@
-@if(mostrarFormulario) {
+@if(mostrarFormularioVacante) {
+<app-formulario-vacante
+  [vacante]="vacante"
+  (cerrarFormularioVacante)="onCerrarFormularioVacante()"
+/>
+} @if(mostrarFormularioPostulacion) {
 <app-formulario-postulacion
-  [idVacante]="vacante?.id"
-  (cerrarFormulario)="onCerrarFormulario()"
+  [idVacante]="vacante.id"
+  (cerrarFormularioPostulacion)="onCerrarFormularioPostulacion()"
 />
 }
 
 <div class="card my-1 ms-1">
   <div class="card-body mt-3">
-    <h5 class="card-title mb-4">{{ vacante?.titulo }}</h5>
+    <h5 class="card-title mb-4">{{ vacante.titulo }}</h5>
     <p class="fw-bold">Descripción:</p>
-    <p class="card-text">{{ vacante?.descripcion }}</p>
+    <p class="card-text">{{ vacante.descripcion }}</p>
 
-    @if(vacante?.ubicacion) {
+    @if(vacante.ubicacion) {
     <p class="fw-bold">Ubicación:</p>
-    <p class="card-text">{{ vacante?.ubicacion }}</p>
+    <p class="card-text">{{ vacante.ubicacion }}</p>
 
-    } @if(vacante?.salario_opc) {
+    } @if(vacante.salarioOpc) {
     <p class="fw-bold">Salario:</p>
     <p class="card-text">
-      {{ vacante?.salario_opc | currency : "S/." : "symbol" : "1.0-3" }}
+      {{ vacante.salarioOpc | currency : "S/." : "symbol" : "1.0-3" }}
     </p>
     }
 
     <p class="fw-bold">Fecha de publicación:</p>
     <p class="card-text">
-      {{ vacante?.fecha_publicacion | date : "longDate" : undefined : "es" }}
+      {{ vacante.fechaPublicacion | date : "longDate" : undefined : "es" }}
     </p>
 
     <p class="fw-bold">Fecha de vencimiento:</p>
     <p class="card-text">
-      {{ vacante?.fecha_vencimiento | date : "longDate" : undefined : "es" }}
+      {{ vacante.fechaVencimiento | date : "longDate" : undefined : "es" }}
     </p>
 
+    @if(!logueado) {
     <button class="btn btn-danger mt-2 mb-3" (click)="onPostular()">
       Postular
     </button>
+    } @else {
+    <button class="btn btn-success mt-2 mb-3" (click)="onEditar()">
+      Editar Vacante
+    </button>
+    <button class="btn btn-danger mt-2 mb-3 ms-3" (click)="onInactivar()">
+      Inactivar Vacante
+    </button>
+    }
   </div>
 </div>

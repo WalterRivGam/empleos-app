@@ -1,0 +1,73 @@
+<div class="backdrop" (click)="onCerrarFormulario()"></div>
+<dialog open class="py-4 px-5 border-0" id="dialogoVacante">
+  <h2 class="fs-3 mb-3">Formulario Vacante</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título (*)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="titulo"
+        name="titulo"
+        required
+        [(ngModel)]="vacante.titulo"
+      />
+      @if(mostrarValidacion && !vacante.titulo) {
+      <p class="text-danger">Por favor ingrese el título de la vacante</p>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción (*)</label>
+      <textarea
+        class="form-control"
+        id="descripcion"
+        name="descripcion"
+        rows="10"
+        required
+        [(ngModel)]="vacante.descripcion"
+      ></textarea>
+      @if(mostrarValidacion && !vacante.descripcion) {
+      <p class="text-danger">Por favor ingrese la descripción de la vacante</p>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="ubicacion" class="form-label">Ubicación</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ubicacion"
+        name="ubicacion"
+        [(ngModel)]="vacante.ubicacion"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="salarioOpc" class="form-label">Salario (S/.)</label>
+      <input
+        type="number"
+        class="form-control"
+        id="salarioOpc"
+        name="salarioOpc"
+        min="0"
+        step="0.01"
+        [(ngModel)]="vacante.salarioOpc"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="fechaVencimiento" class="form-label"
+        >Fecha de Vencimiento (*)</label
+      >
+      <input
+        type="date"
+        class="form-control"
+        id="fechaVencimiento"
+        name="fechaVencimiento"
+        required
+        [(ngModel)]="vacante.fechaVencimiento"
+      />
+      @if(mostrarValidacion && !vacante.fechaVencimiento) {
+      <p class="text-danger">Por favor ingrese la fecha de vencimiento</p>
+      }
+    </div>
+    <button type="submit" class="btn btn-danger me-2">Guardar</button>
+  </form>
+</dialog>

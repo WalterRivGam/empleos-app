@@ -1,12 +1,12 @@
-export interface Vacante {
-    id: number;
-    titulo: string;
-    descripcion: string;
-    ubicacion: string;
-    salario_opc: number | null;
-    fecha_publicacion: string;
-    fecha_vencimiento: string;
-    estado: string;
-    created_at: string;
-    updated_at: string;
-  }
+export class Vacante {
+  id: number = 0;
+  titulo: string = '';
+  descripcion: string = '';
+  ubicacion: string = '';
+  salarioOpc: number | null = 0;
+  fechaPublicacion: string = '';
+  fechaVencimiento: string = '';
+  estado: string = '';
+  createdAt: string = '';
+  updatedAt: string = '';
+}

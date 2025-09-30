@@ -60,7 +60,7 @@
         id="cvFile"
         name="archivo"
         required
-        [(ngModel)]="postulacion.archivo"
+        (change)="onFileChange($event)"
       />
       @if(mostrarValidacion && !postulacion.archivo) {
       <p class="text-danger">Por favor adjunte su CV</p>

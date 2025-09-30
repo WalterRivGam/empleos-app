@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { VacanteComponent } from '../vacante/vacante';
 import { Vacante } from '../../models/vacante.model';
 import { VacanteService } from '../../services/vacante.service';
@@ -9,14 +9,21 @@ import { VacanteService } from '../../services/vacante.service';
   templateUrl: './vacantes.html',
   styleUrl: './vacantes.css',
 })
-export class VacantesComponent {
+export class VacantesComponent implements OnInit {
   private vacanteService = inject(VacanteService);
-
-  get vacantes(): Vacante[] {
-    return this.vacanteService.getVacantes();
-  }
+  vacantes: Vacante[] = [];
 
   @Output() seleccionVacante = new EventEmitter<number>();
+
+  ngOnInit() {
+    this.cargarVacantes();
+  }
+
+  cargarVacantes() {
+    this.vacanteService.getVacantes().subscribe((data) => {
+      this.vacantes = data;
+    });
+  }
 
   onVacanteSeleccionada(id: number) {
     this.seleccionVacante.emit(id);

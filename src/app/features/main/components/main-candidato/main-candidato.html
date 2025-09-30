@@ -1,0 +1,27 @@
+<main class="row px-3">
+  <div class="col-4 col-lg-3 px-0">
+    <app-vacantes (seleccionVacante)="onVacanteSeleccionada($event)" />
+  </div>
+
+  @if (idVacanteSeleccionada) { @if (vacante$ | async; as vacante) {
+  <div class="col-8 col-lg-9 px-0">
+    <app-detalle-vacante [vacante]="vacante" (vacanteInactivada)="onVacanteInactivada()"></app-detalle-vacante>
+  </div>
+  } @else {
+  <div class="col-8 col-lg-9 px-0">
+    <div class="card my-1 ms-1">
+      <div class="card-body my-1 ms-1 py-5 text-center text-secondary">
+        <h5 class="card-title">Cargando vacante...</h5>
+      </div>
+    </div>
+  </div>
+  } } @else {
+  <div class="col-8 col-lg-9 px-0">
+    <div class="card my-1 ms-1">
+      <div class="card-body my-1 ms-1 py-5 text-center text-secondary">
+        <h5 class="card-title">Seleccione una vacante</h5>
+      </div>
+    </div>
+  </div>
+  }
+</main>
