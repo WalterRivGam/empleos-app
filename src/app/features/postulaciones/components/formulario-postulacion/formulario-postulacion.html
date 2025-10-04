@@ -61,9 +61,12 @@
         name="archivo"
         required
         (change)="onFileChange($event)"
+        accept="application/pdf"
       />
       @if(mostrarValidacion && !postulacion.archivo) {
       <p class="text-danger">Por favor adjunte su CV</p>
+      } @if(mostrarErrorArchivo) {
+      <p class="text-danger">{{ mensajeErrorArchivo }}</p>
       }
     </div>
     <button type="submit" class="btn btn-danger">Enviar Postulación</button>

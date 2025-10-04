@@ -16,6 +16,8 @@ export class FormularioPostulacionComponent {
   postulacionService = inject(PostulacionService);
   mostrarValidacion: boolean = false;
   @Output() cerrarFormularioPostulacion = new EventEmitter<void>();
+  mostrarErrorArchivo = false;
+  mensajeErrorArchivo = '';
 
   onSubmit() {
     this.mostrarValidacion = true;
@@ -34,10 +36,32 @@ export class FormularioPostulacionComponent {
     this.onCerrarFormulario();
   }
 
-  onFileChange(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.postulacion.archivo = event.target.files[0];
+  onFileChange(event: Event): void {
+    this.mostrarErrorArchivo = false;
+    this.mensajeErrorArchivo = '';
+
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+
+    const file = input.files[0];
+    const maxSizeMB = 2;
+    const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+    if (file.size > maxSizeBytes) {
+      this.mostrarErrorArchivo = true;
+      this.mensajeErrorArchivo = 'El archivo excede los 2 MB permitidos.';
+      input.value = '';
+      return;
     }
+
+    if (file.type !== 'application/pdf') {
+      this.mostrarErrorArchivo = true;
+      this.mensajeErrorArchivo = 'Solo se permiten archivos PDF.';
+      input.value = '';
+      return;
+    }
+
+    this.postulacion.archivo = input.files[0];
   }
 
   onCerrarFormulario() {
