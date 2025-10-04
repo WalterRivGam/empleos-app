@@ -18,6 +18,7 @@ export class FormularioPostulacionComponent {
   @Output() cerrarFormularioPostulacion = new EventEmitter<void>();
   mostrarErrorArchivo = false;
   mensajeErrorArchivo = '';
+  @Output() postulacionExitosa = new EventEmitter<void>();
 
   onSubmit() {
     this.mostrarValidacion = true;
@@ -29,11 +30,16 @@ export class FormularioPostulacionComponent {
     }
 
     this.postulacionService.agregarPostulacion(this.postulacion).subscribe({
-      next: (response) => console.log('Respuesta:', response),
-      error: (error) => console.error('Error:', error),
-      complete: () => console.log('Completado'),
+      next: (response) => {
+        console.log('Respuesta:', response);
+        this.postulacionExitosa.emit();
+        this.onCerrarFormulario();
+      },
+      error: (error) => {
+        console.error('Error:', error);
+      },
+      complete: () => console.log('completado'),
     });
-    this.onCerrarFormulario();
   }
 
   onFileChange(event: Event): void {

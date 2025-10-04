@@ -2,12 +2,27 @@
 <app-formulario-vacante
   [vacante]="vacante"
   (cerrarFormularioVacante)="onCerrarFormularioVacante()"
+  (vacanteGuardada)="onVacanteGuardada()"
 />
 } @if(mostrarFormularioPostulacion) {
 <app-formulario-postulacion
   [idVacante]="vacante.id"
   (cerrarFormularioPostulacion)="onCerrarFormularioPostulacion()"
+  (postulacionExitosa)="onPostulacionExitosa()"
 />
+} @if(postulacionExitosa) {
+<div class="backdrop z-1" (click)="onCerrarMensajeExito()"></div>
+<dialog open class="z-3 border-0 p-0">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Envío exitoso</h5>
+      <p class="card-text">La postulación fué enviada exitosamente.</p>
+      <button class="btn btn-success" (click)="onCerrarModal()">
+        Continuar
+      </button>
+    </div>
+  </div>
+</dialog>
 }
 
 <div class="card my-1 ms-1">

@@ -1,5 +1,5 @@
-<div class="backdrop" (click)="onCerrarFormulario()"></div>
-<dialog open class="py-4 px-5 border-0" id="formularioDiag">
+<div class="backdrop z-1" (click)="onCerrarFormulario()"></div>
+<dialog open class="py-4 px-5 border-0 z-2" id="formularioDiag">
   <h2 class="fs-3 mb-3">Formulario de postulación</h2>
   <form (ngSubmit)="onSubmit()">
     <div class="mb-3">
@@ -11,6 +11,7 @@
         name="nombre"
         required
         [(ngModel)]="postulacion.nombre"
+        autocomplete="off"
       />
       @if(mostrarValidacion && !postulacion.nombre) {
       <p class="text-danger">Por favor ingrese su nombre completo</p>
@@ -26,6 +27,7 @@
         name="email"
         required
         [(ngModel)]="postulacion.email"
+        autocomplete="off"
       />
       @if(mostrarValidacion && !postulacion.email) {
       <p class="text-danger">Por favor ingrese un correo electrónico válido</p>
@@ -40,10 +42,11 @@
         name="telefono"
         required
         [(ngModel)]="postulacion.telefono"
+        autocomplete="off"
       />
     </div>
     <div class="mb-3">
-      <label for="comentario" class="form-label">Comentario Adicional</label>
+      <label for="comentario" class="form-label">Comentario</label>
       <textarea
         class="form-control"
         id="comentario"
@@ -64,12 +67,14 @@
         accept="application/pdf"
       />
       @if(mostrarValidacion && !postulacion.archivo) {
-      <p class="text-danger">Por favor adjunte su CV</p>
+      <p class="text-danger mb-1">Por favor adjunte su CV</p>
       } @if(mostrarErrorArchivo) {
       <p class="text-danger">{{ mensajeErrorArchivo }}</p>
       }
     </div>
-    <button type="submit" class="btn btn-danger">Enviar Postulación</button>
+    <button type="submit" class="btn btn-danger mt-2">
+      Enviar Postulación
+    </button>
     <button
       type="button"
       class="btn btn-secondary ms-3"
@@ -79,3 +84,5 @@
     </button>
   </form>
 </dialog>
+
+

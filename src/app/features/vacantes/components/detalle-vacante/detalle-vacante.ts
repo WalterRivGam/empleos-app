@@ -23,6 +23,8 @@ export class DetalleVacante {
   mostrarFormularioVacante: boolean = false;
   vacanteService = inject(VacanteService);
   @Output() vacanteInactivada = new EventEmitter<void>();
+  postulacionExitosa = false;
+  @Output() vacanteGuardada = new EventEmitter<void>();
 
   onPostular() {
     this.mostrarFormularioPostulacion = true;
@@ -46,5 +48,21 @@ export class DetalleVacante {
       next: (res) => this.vacanteInactivada.emit(),
       error: (err) => console.error('Error', err),
     });
+  }
+
+  onPostulacionExitosa() {
+    this.postulacionExitosa = true;
+  }
+
+  onCerrarModal() {
+    this.postulacionExitosa = false;
+  }
+
+  onVacanteGuardada() {
+    this.vacanteGuardada.emit();
+  }
+
+  onCerrarMensajeExito() {
+    this.postulacionExitosa = false;
   }
 }
