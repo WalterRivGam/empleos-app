@@ -13,9 +13,17 @@
     <button class="btn btn-warning w-100 mt-1" (click)="onAgregarVacante()">
       Crear Vacante
     </button>
+    <button class="btn btn-danger w-100 mt-1" (click)="onVerDashboard()">
+      Ver Dashboard
+    </button>
     <app-vacantes (seleccionVacante)="onVacanteSeleccionada($event)" />
   </div>
-  @if(idVacanteSeleccionada) {
+
+  @if(verDashboard && !idVacanteSeleccionada) {
+  <div class="col-8 col-lg-9 px-0">
+    <app-dashboard />
+  </div>
+  } @if(idVacanteSeleccionada) {
   <div class="col-8 col-lg-9 px-0">
     @if(vacante$ | async; as vacanteData) {
     <app-detalle-vacante
@@ -28,7 +36,7 @@
     <p>Cargando detalle de vacante...</p>
     }
   </div>
-  } @else {
+  } @if(!idVacanteSeleccionada && !verDashboard) {
   <div class="col-8 col-lg-9 px-0">
     <div class="card my-1 ms-1">
       <div class="card-body my-1 ms-1 py-5 text-center text-secondary">

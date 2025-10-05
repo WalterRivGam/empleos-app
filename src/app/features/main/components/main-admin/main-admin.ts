@@ -1,4 +1,10 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { VacanteService } from '../../../vacantes/services/vacante.service';
 import { Vacante } from '../../../vacantes/models/vacante.model';
 import { VacantesComponent } from '../../../vacantes/components/vacantes/vacantes';
@@ -6,6 +12,8 @@ import { DetalleVacante } from '../../../vacantes/components/detalle-vacante/det
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { FormularioVacanteComponent } from '../../../vacantes/components/formulario-vacante/formulario-vacante';
+import { DashboardComponent } from '../../../dashboard/components/dashboard/dashboard';
+import { Contador } from '../../../dashboard/models/contador.model';
 
 @Component({
   selector: 'app-main-admin',
@@ -14,6 +22,7 @@ import { FormularioVacanteComponent } from '../../../vacantes/components/formula
     DetalleVacante,
     AsyncPipe,
     FormularioVacanteComponent,
+    DashboardComponent,
   ],
   templateUrl: './main-admin.html',
   styleUrl: './main-admin.css',
@@ -24,8 +33,9 @@ export class MainAdminComponent {
   logueado: boolean = false;
   mostrarFormularioVacante: boolean = false;
   vacante: Vacante = new Vacante();
-
+  verDashboard = false;
   vacante$!: Observable<Vacante>;
+  contadores: Contador = { activas: 0, expiradas: 0 };
 
   @ViewChild(VacantesComponent) vacantesComp!: VacantesComponent;
 
@@ -54,5 +64,11 @@ export class MainAdminComponent {
     this.vacantesComp.cargarVacantes();
     // opcional: limpiar detalle
     this.idVacanteSeleccionada = 0;
+  }
+
+  onVerDashboard() {
+    this.verDashboard = true;
+    this.idVacanteSeleccionada = 0;
+    
   }
 }

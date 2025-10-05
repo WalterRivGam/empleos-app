@@ -1,0 +1,25 @@
+<div>
+  <div class="row p-2">
+    <div class="col-6">
+      <button
+        class="btn btn-success w-100"
+        (click)="onMostrarVacantesPorEstado()"
+      >
+        Vacantes activas/expiradas
+      </button>
+    </div>
+    <div class="col-6">
+      <button
+        class="btn btn-success w-100"
+        (click)="onMostrarTop5PostulacionesPorVacante()"
+      >
+        Top 5 postulaciones por vacante
+      </button>
+    </div>
+  </div>
+  @if(mostrarVacantesPorEstado) {
+  <canvas id="dashboardVacantesPorEstado"></canvas>
+  } @else {
+  <canvas id="dashboardTop5Postulaciones"></canvas>
+  }
+</div>

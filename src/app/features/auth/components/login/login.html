@@ -9,6 +9,7 @@
         name="username"
         required
         [(ngModel)]="credenciales.username"
+        autocomplete="off"
       />
       @if(mostrarValidacion && !credenciales.username) {
       <p class="text-danger">Por favor ingrese su usuario</p>

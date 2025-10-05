@@ -43,7 +43,7 @@ export class DetalleVacante {
   }
 
   onInactivar() {
-    this.vacante.estado = 'cerrada';
+    this.vacante.estado = 'expirada';
     this.vacanteService.actualizarVacante(this.vacante).subscribe({
       next: (res) => this.vacanteInactivada.emit(),
       error: (err) => console.error('Error', err),
