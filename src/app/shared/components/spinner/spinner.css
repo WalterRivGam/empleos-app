@@ -1,0 +1,17 @@
+.spinner-overlay {
+  position: fixed; /* se mantiene fijo sobre toda la ventana */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* mayor que cualquier otro elemento */
+}
+
+.spinner-border {
+  width: 4rem;
+  height: 4rem;
+}

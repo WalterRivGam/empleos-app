@@ -1,3 +1,7 @@
+@if(cargando) {
+<app-spinner />
+}
+
 <div class="backdrop z-1" (click)="onCerrarFormulario()"></div>
 <dialog open class="py-4 px-5 border-0 z-2" id="formularioDiag">
   <h2 class="fs-3 mb-3">Formulario de postulación</h2>
@@ -84,5 +88,3 @@
     </button>
   </form>
 </dialog>
-
-

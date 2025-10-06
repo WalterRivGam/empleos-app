@@ -2,10 +2,11 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Postulacion } from '../../model/postulacion.model';
 import { PostulacionService } from '../../services/postulacion.service';
+import { SpinnerComponent } from '../../../../shared/components/spinner/spinner';
 
 @Component({
   selector: 'app-formulario-postulacion',
-  imports: [FormsModule],
+  imports: [FormsModule, SpinnerComponent],
   templateUrl: './formulario-postulacion.html',
   styleUrl: './formulario-postulacion.css',
 })
@@ -19,6 +20,7 @@ export class FormularioPostulacionComponent {
   mostrarErrorArchivo = false;
   mensajeErrorArchivo = '';
   @Output() postulacionExitosa = new EventEmitter<void>();
+  cargando = false;
 
   onSubmit() {
     this.mostrarValidacion = true;
@@ -29,6 +31,8 @@ export class FormularioPostulacionComponent {
       return;
     }
 
+    this.cargando = true;
+
     this.postulacionService.agregarPostulacion(this.postulacion).subscribe({
       next: (response) => {
         console.log('Respuesta:', response);
@@ -37,8 +41,12 @@ export class FormularioPostulacionComponent {
       },
       error: (error) => {
         console.error('Error:', error);
+        this.cargando = false;
       },
-      complete: () => console.log('completado'),
+      complete: () => {
+        this.cargando = false;
+        console.log('completado');
+      },
     });
   }
 
